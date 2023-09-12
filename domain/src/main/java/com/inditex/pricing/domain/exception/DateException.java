@@ -1,10 +1,12 @@
 package com.inditex.pricing.domain.exception;
 
-public class DateException extends RuntimeException{
-  private String message;
-  private String code;
-  public DateException(String message, String code) {
-    super(message);
-    this.code = code;
+import java.time.LocalDateTime;
+
+public class DateException extends BusinessException {
+  private static final String MESSAGE_FORMAT = "Start date '%s' must not be before end date '%s'";
+  private static final String code = "B001";
+
+  public DateException(LocalDateTime startDate, LocalDateTime endDate) {
+    super(String.format(MESSAGE_FORMAT, startDate.toString(), endDate.toString()), code);
   }
 }

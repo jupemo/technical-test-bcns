@@ -1,5 +1,6 @@
 package com.inditex.pricing.domain;
 
+import com.inditex.pricing.domain.exception.CurrencyException;
 import com.inditex.pricing.domain.exception.DateException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -40,7 +41,7 @@ public class Price {
 
   private void checkDates(LocalDateTime startDate, LocalDateTime endDate) {
     if(startDate.isAfter(endDate))
-      throw new DateException("start date should be after end date", "001");
+      throw new DateException(startDate, endDate);
   }
 
   private String checkCurrency(String currency) {
@@ -48,8 +49,39 @@ public class Price {
       if(availableCurrencies.getCurrencyCode().equals(currency))
         return currency;
     }
-    throw new IllegalArgumentException("message");
+    throw new CurrencyException(currency);
   }
 
+  public Integer priceList() {
+    return priceList;
+  }
+
+  public Integer productId() {
+    return productId;
+  }
+
+  public Integer brandId() {
+    return brandId;
+  }
+
+  public String currency() {
+    return currency;
+  }
+
+  public LocalDateTime startDate() {
+    return startDate;
+  }
+
+  public LocalDateTime endDate() {
+    return endDate;
+  }
+
+  public Integer priority() {
+    return priority;
+  }
+
+  public BigDecimal price() {
+    return price;
+  }
 
 }
