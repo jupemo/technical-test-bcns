@@ -2,6 +2,7 @@ package com.inditex.pricing.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.inditex.pricing.domain.exception.CurrencyException;
 import com.inditex.pricing.domain.exception.DateException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -41,7 +42,7 @@ class PriceTest {
     String currency = "RRR";
 
     assertThrows(
-        IllegalArgumentException.class,
+        CurrencyException.class,
         () ->
             new Price(
                 1,
