@@ -4,7 +4,7 @@ import com.inditex.pricing.application.port.input.GetCorrectPriceQuery;
 import com.inditex.pricing.domain.Price;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface PriceMapper {
   GetCorrectPriceQuery.PriceResult map(Price price);
 }

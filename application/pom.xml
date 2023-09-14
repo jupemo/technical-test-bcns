@@ -8,7 +8,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.example</groupId>
   <artifactId>application</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>application</name>
@@ -31,16 +30,7 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>com.inditex.pricing</groupId>
-      <artifactId>adapter-rest</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>com.inditex.pricing</groupId>
-      <artifactId>adapter-databse</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
+
     <dependency>
       <groupId>com.inditex.pricing</groupId>
       <artifactId>domain</artifactId>
