@@ -1,0 +1,13 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+# Spring configuration
+spring:
+  application:
+    name: pricing
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  profiles:
+    include:
+      - database
