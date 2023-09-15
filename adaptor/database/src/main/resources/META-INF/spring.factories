@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.inditex.pricing.adaptor.database.config.DatabaseH2Configuration
