@@ -9,4 +9,5 @@ spring:
     properties:
       hibernate:
         globally_quoted_identifiers: true
+    defer-datasource-initialization: true
 
