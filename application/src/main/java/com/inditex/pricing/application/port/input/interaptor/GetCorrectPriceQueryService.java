@@ -1,5 +1,6 @@
 package com.inditex.pricing.application.port.input.interaptor;
 
+import com.inditex.pricing.application.exception.NotFoundException;
 import com.inditex.pricing.application.port.input.GetCorrectPriceQuery;
 import com.inditex.pricing.application.port.input.mapper.PriceMapper;
 import com.inditex.pricing.application.port.output.LoadPricePort;
@@ -15,7 +16,9 @@ public class GetCorrectPriceQueryService implements GetCorrectPriceQuery {
 
   @Override
   public PriceResult retrievePrice(Command command) {
-    return priceMapper.map(
-        loadPricePort.getPrice(command.date(), command.productId(), command.brandId()));
+    return loadPricePort
+        .getPrice(command.date(), command.productId(), command.brandId())
+        .map(priceMapper::map)
+        .orElseThrow(() -> new NotFoundException(command.productId(), command.brandId()));
   }
 }

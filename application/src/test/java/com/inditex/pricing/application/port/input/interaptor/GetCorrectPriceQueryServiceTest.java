@@ -1,6 +1,5 @@
 package com.inditex.pricing.application.port.input.interaptor;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -12,6 +11,7 @@ import com.inditex.pricing.application.port.output.LoadPricePort;
 import com.inditex.pricing.domain.Price;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -33,7 +33,7 @@ class GetCorrectPriceQueryServiceTest {
     var priceValue =
         new PriceResult(1, date.minusDays(1), date.plusDays(1), 1, 1, BigDecimal.valueOf(22.1));
 
-    when(loadPricePort.getPrice(date, 1, 1)).thenReturn(price);
+    when(loadPricePort.getPrice(date, 1, 1)).thenReturn(Optional.of(price));
     when(priceMapper.map(price)).thenReturn(priceValue);
 
     testUnit.retrievePrice(command);
