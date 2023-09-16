@@ -17,7 +17,7 @@ class LoadPriceAdapterTest {
 
   @Test
   void test() {
-    loadPriceAdapter.getPrice(LocalDateTime.of(2020, 6, 14, 11,0,0), 35455, 1);
+    loadPriceAdapter.getPrice(LocalDateTime.of(2021, 6, 14, 17,0,0), 35455, 1);
   }
 
 

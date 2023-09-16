@@ -1,15 +1,8 @@
 package com.inditex.pricing.adaptor.database.repository.jpa;
 
 import com.inditex.pricing.adaptor.database.entity.PriceEntity;
-import jakarta.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface SpringDataPriceRepository extends JpaRepository<PriceEntity, Integer> {
-  PriceEntity findByProductIdAndBrandIdAndStartDateBeforeAndEndDateAfter(
-      Integer productId,
-      @NotNull Integer brandId,
-      @NotNull LocalDateTime startDate,
-      @NotNull LocalDateTime endDate);
-
-}
+public interface SpringDataPriceRepository
+    extends JpaRepository<PriceEntity, Integer>, JpaSpecificationExecutor<PriceEntity> {}
