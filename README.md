@@ -19,12 +19,15 @@ Follow these steps to start the Spring Boot application:
 that
 it can be used as a dependency in other Maven projects. Additionally, it can run tests and perform code quality analysis
 based on your project's configuration.
+
 ---
 `mvn spring-boot:run -pl main -o` is used to run the Spring Boot application in the "main" module of your current
 project in offline mode. This means that
 Maven won't attempt to download dependencies from remote repositories and will rely solely on dependencies stored
 locally in your Maven local repository.
+
 ---
+
 `mvn verify`  will separately run all the application tests/ 
 
 ---
