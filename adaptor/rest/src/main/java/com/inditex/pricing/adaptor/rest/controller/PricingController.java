@@ -18,7 +18,7 @@ public class PricingController {
   private final PriceResponseMapper priceResponseMapper;
   private final GetCorrectPriceQuery getCorrectPriceQuery;
 
-  @GetMapping("price/product/{productId}/brand/{brandId}")
+  @GetMapping("prices/products/{productId}/brands/{brandId}")
   public PriceResponse getPrice(
       @PathVariable Integer productId,
       @PathVariable Integer brandId,

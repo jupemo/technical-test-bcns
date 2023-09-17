@@ -1,6 +1,5 @@
 package com.inditex.pricing.domain.exception;
 
-
 import lombok.Getter;
 
 @Getter
@@ -11,5 +10,4 @@ public class BusinessException extends RuntimeException {
     super(message);
     this.code = code;
   }
-
 }

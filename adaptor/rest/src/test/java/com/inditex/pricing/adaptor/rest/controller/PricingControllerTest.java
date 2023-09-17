@@ -38,7 +38,7 @@ class PricingControllerTest {
   @Test
   void shouldCallGetCorrectPricingQuery_priceRequestComplete() throws Exception {
     var request =
-        MockMvcRequestBuilders.get("/price/product/1/brand/1?date=" + LocalDateTime.now())
+        MockMvcRequestBuilders.get("/prices/products/1/brands/1?date=" + LocalDateTime.now())
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.APPLICATION_JSON_VALUE);
 
@@ -51,7 +51,7 @@ class PricingControllerTest {
   void shouldCallGetCorrectPricingQuery_priceRequestNullDate() throws Exception {
 
     var request =
-        MockMvcRequestBuilders.get("/price/product/1/brand/1")
+        MockMvcRequestBuilders.get("/prices/products/1/brands/1")
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.APPLICATION_JSON_VALUE);
 
@@ -69,7 +69,7 @@ class PricingControllerTest {
 
     when(getCorrectPriceQuery.retrievePrice(command)).thenReturn(priceResult);
     var request =
-        MockMvcRequestBuilders.get("/price/product/1/brand/1?date=" + date)
+        MockMvcRequestBuilders.get("/prices/products/1/brands/1?date=" + date)
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.APPLICATION_JSON_VALUE);
 
