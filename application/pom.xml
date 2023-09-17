@@ -13,7 +13,7 @@
   <name>application</name>
   <description>application pricing</description>
   <properties>
-    <java.version>17</java.version>
+    <java.version>${java.version}</java.version>
   </properties>
 
   <dependencies>

@@ -8,13 +8,9 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
   </parent>
-  <artifactId>main</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>main</name>
-  <description>main</description>
-  <properties>
-    <java.version>${java.version}</java.version>
-  </properties>
+  <artifactId>report</artifactId>
+  <version>${project.parent.version}</version>
+
   <dependencies>
 
     <dependency>
@@ -42,10 +38,22 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>report-aggregate</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report-aggregate</goal>
+            </goals>
+            <configuration>
+              <dataFileIncludes>**/jacoco/jacoco-*.exec</dataFileIncludes>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
-
 </project>
