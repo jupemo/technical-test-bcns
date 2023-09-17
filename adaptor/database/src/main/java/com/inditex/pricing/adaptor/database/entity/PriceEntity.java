@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -64,6 +63,7 @@ public class PriceEntity {
     private Integer productId;
     private Integer priceList;
   }
+
   @Override
   public final boolean equals(Object o) {
     if (this == o) return true;

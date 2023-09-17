@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @RestControllerAdvice
 @RequiredArgsConstructor
@@ -33,7 +32,9 @@ public class GlobalExceptionHandler {
   @ResponseBody
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ErrorDTO handle(TypeMismatchException e) {
-    var message = String.format("Bad parameter type '%s' required type '%s'", e.getPropertyName(), e.getRequiredType());
+    var message =
+        String.format(
+            "Bad parameter type '%s' required type '%s'", e.getPropertyName(), e.getRequiredType());
     return new ErrorDTO(message, "V0001");
   }
 
