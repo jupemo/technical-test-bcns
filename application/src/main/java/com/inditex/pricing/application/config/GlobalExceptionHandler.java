@@ -1,5 +1,6 @@
 package com.inditex.pricing.application.config;
 
+import com.inditex.pricing.application.exception.NotFoundException;
 import com.inditex.pricing.domain.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,13 @@ public class GlobalExceptionHandler {
   @ResponseBody
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ErrorDTO handle(BusinessException e) {
+    return new ErrorDTO(e.getMessage(), e.getCode());
+  }
+
+  @ExceptionHandler(NotFoundException.class)
+  @ResponseBody
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public ErrorDTO handle(NotFoundException e) {
     return new ErrorDTO(e.getMessage(), e.getCode());
   }
 
