@@ -9,11 +9,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.inditex.pricing.adaptor.rest.dto.PriceRequest;
 import com.inditex.pricing.adaptor.rest.dto.PriceResponse;
-import com.inditex.pricing.adaptor.rest.mapper.PriceRequestMapperImpl;
 import com.inditex.pricing.adaptor.rest.mapper.PriceResponseMapperImpl;
 import com.inditex.pricing.application.port.input.GetCorrectPriceQuery;
+import com.inditex.pricing.application.port.input.GetCorrectPriceQuery.Command;
 import com.inditex.pricing.application.port.input.GetCorrectPriceQuery.PriceResult;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -35,17 +34,13 @@ class PricingControllerTest {
   @Autowired ObjectMapper objectMapper;
   @MockBean GetCorrectPriceQuery getCorrectPriceQuery;
   @SpyBean PriceResponseMapperImpl priceResponseMapper;
-  @SpyBean PriceRequestMapperImpl priceRequestMapper;
 
   @Test
   void shouldCallGetCorrectPricingQuery_priceRequestComplete() throws Exception {
-    var requestBody = new PriceRequest(LocalDateTime.now(), 1);
-
     var request =
-        MockMvcRequestBuilders.get("/price/1")
+        MockMvcRequestBuilders.get("/price/product/1/brand/1?date=" + LocalDateTime.now())
             .accept(MediaType.APPLICATION_JSON)
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .content(objectMapper.writeValueAsString(requestBody));
+            .contentType(MediaType.APPLICATION_JSON_VALUE);
 
     mockMvc.perform(request).andDo(print()).andExpect(status().isOk());
 
@@ -54,48 +49,29 @@ class PricingControllerTest {
 
   @Test
   void shouldCallGetCorrectPricingQuery_priceRequestNullDate() throws Exception {
-    var requestBody = new PriceRequest(null, 1);
 
     var request =
-        MockMvcRequestBuilders.get("/price/1")
+        MockMvcRequestBuilders.get("/price/product/1/brand/1")
             .accept(MediaType.APPLICATION_JSON)
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .content(objectMapper.writeValueAsString(requestBody));
+            .contentType(MediaType.APPLICATION_JSON_VALUE);
 
     mockMvc.perform(request).andDo(print()).andExpect(status().isOk());
 
     verify(getCorrectPriceQuery, times(1)).retrievePrice(any());
   }
 
-
-  @Test
-  void shouldReturnBadRequest_priceRequestNullPriceId() throws Exception {
-    var requestBody = new PriceRequest(LocalDateTime.now(), null);
-
-    var request =
-        MockMvcRequestBuilders.get("/price/1")
-            .accept(MediaType.APPLICATION_JSON)
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .content(objectMapper.writeValueAsString(requestBody));
-
-    mockMvc.perform(request).andDo(print()).andExpect(status().isBadRequest());
-
-    verify(getCorrectPriceQuery, times(0)).retrievePrice(any());
-  }
-
   @Test
   void shouldReturnOneElement() throws Exception {
-    var requestBody = new PriceRequest(LocalDateTime.now(), 1);
+    var date = LocalDateTime.of(2020, 10, 1, 1, 1);
+    var command = new Command(date, 1, 1);
     var priceResult =
         new PriceResult(1, LocalDateTime.now(), LocalDateTime.now(), 1, 1, BigDecimal.valueOf(2.1));
 
-    when(getCorrectPriceQuery.retrievePrice(priceRequestMapper.map(1, requestBody)))
-        .thenReturn(priceResult);
+    when(getCorrectPriceQuery.retrievePrice(command)).thenReturn(priceResult);
     var request =
-        MockMvcRequestBuilders.get("/price/1")
+        MockMvcRequestBuilders.get("/price/product/1/brand/1?date=" + date)
             .accept(MediaType.APPLICATION_JSON)
-            .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .content(objectMapper.writeValueAsString(requestBody));
+            .contentType(MediaType.APPLICATION_JSON_VALUE);
 
     var response =
         mockMvc
