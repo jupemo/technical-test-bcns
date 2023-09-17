@@ -71,5 +71,19 @@ This project is based in Hexagonal architecture aka Ports and Adapters Architect
 
 ![img_1.png](img_1.png)
 
+### Jacoco files
+
+The jacoco report can be found in the module report in the path
+`/target/site/jacoco-aggregate/index.html`
+
+### What can be improved
+
+This project it is far to be perfect, the intention was to complete de objectives, but still are things to be refined.
+
+#### Logs
+
+The project does not have logs or metrics, those should be included.
+Those can be included using Sl4J, and also using the logback library which log the rest calls
+
 
    
